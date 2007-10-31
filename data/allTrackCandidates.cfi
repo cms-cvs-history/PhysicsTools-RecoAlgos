@@ -1,0 +1,6 @@
+include "SimGeneral/HepPDTESSource/data/pythiapdt.cfi"
+
+module allTrackCandidates = ConcreteChargedCandidateProducer {
+  InputTag src = ctfWithMaterialTracks
+  string particleType = "pi+"
+}

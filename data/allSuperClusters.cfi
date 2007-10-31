@@ -1,0 +1,4 @@
+module allSuperClusters = EcalCandidateProducer {
+  InputTag src = hybridSuperClusters
+  string particleType = "gamma"
+}
