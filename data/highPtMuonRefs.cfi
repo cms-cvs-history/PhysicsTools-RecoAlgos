@@ -1,0 +1,4 @@
+module highPtMuonRefs = MuonRefSelector {
+  InputTag src = muons
+  string cut "pt > 20"
+}
