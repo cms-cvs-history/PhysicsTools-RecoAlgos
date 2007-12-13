@@ -1,0 +1,8 @@
+module trackFullCloneSelector = TrackFullCloneSelector {
+        InputTag src  = ctfWithMaterialTracks
+        string   cut  = "(numberOfValidHits >= 8) & (normalizedChi2 < 5)" 
+        untracked bool copyExtras   = false # copies also extras and rechits on RECO
+                                            # don't set this to true on AOD!
+        untracked bool copyTrajectories = false # copy also the trajs and traj->track map
+
+}

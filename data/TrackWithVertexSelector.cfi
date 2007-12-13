@@ -1,9 +1,15 @@
-module trackWithVertexSelector = TrackWithVertexSelectorProducer {
+module trackWithVertexSelector = TrackWithVertexSelector {
         # the track collection
         InputTag src  = ctfWithMaterialTracks
-        
+ 
+        untracked bool copyExtras   = false # copies also extras and rechits on RECO
+                                            # don't set this to true on AOD!
+        untracked bool copyTrajectories = false # copy also the trajs and traj->track map
+       
         # quality cuts (valid hits, normalized chi2)
-        uint32 numberOfValidHits = 8
+        uint32 numberOfValidHits = 8         # at least 8 valid hits
+        uint32 numberOfValidPixelHits = 0    # at least <n> hits inthe pixeles
+        uint32 numberOfLostHits  = 999       # at most 999 lost hits
         double normalizedChi2    = 999999.0
 
         # kinematic cuts  (pT in GeV)
@@ -12,18 +18,16 @@ module trackWithVertexSelector = TrackWithVertexSelectorProducer {
         double etaMin   = 0
         double etaMax   = 5
 
-        # impact parameter cuts (in cm, AFAIK)
+        # impact parameter cuts (in cm)
         double dzMax    = 35
         double d0Max    = 10
 
         # compatibility with a vertex ?
         bool     useVtx    = true
-        uint32   nVertices = 3
-           # how many vertices to look at before dropping the track
+        uint32   nVertices = 3      # how many vertices to look at before dropping the track
         InputTag vertexTag = offlinePrimaryVerticesFromCTFTracks
-        bool     vtxFallback = true
-           # use (0,0,0) as primary vertex if the vertex collection is empty
-        double   zetaVtx     = 1
-        double   rhoVtx      = 1
-           # distance from vertex (cm, AFAIK)
+        bool     vtxFallback = true # falback to beam spot if there are no vertices
+                                    # uses vtx=(0,0,0) with deltaZeta=15.9, deltaRho = 0.2
+        double   zetaVtx     = 1    # tags used by b-tagging folks
+        double   rhoVtx      = 0.2  # tags used by b-tagging folks
 }
