@@ -1,3 +1,3 @@
 module allElectrons = GsfElectronCloneProducer {
-  InputTag src = pixelMatchGsfElectrons
+  InputTag src = gsfElectrons
 }
