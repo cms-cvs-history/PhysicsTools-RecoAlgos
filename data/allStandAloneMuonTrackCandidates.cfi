@@ -1,6 +1,6 @@
 include "SimGeneral/HepPDTESSource/data/pythiapdt.cfi"
 
-module allStandAloneMuonTrackCandidates = ConcreteChargedCandidateProducer {
+module allStandAloneMuonTrackCandidates = ConcreteStandAloneMuonCandidateProducer {
   InputTag src = standAloneMuons:UpdatedAtVtx 
   string particleType = "mu+"
 }
