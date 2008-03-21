@@ -1,4 +1,4 @@
 module highPtTrackRefs = TrackRefSelector {
   InputTag src = ctfWithMaterialTracks
-  string cut "pt > 20"
+  string cut = "pt > 20"
 }
