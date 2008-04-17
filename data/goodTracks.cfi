@@ -1,5 +1,5 @@
 module goodTracks = TrackViewCandidateProducer {
-  InputTag src = ctfWithMaterialTracks
+  InputTag src = generalTracks
   string particleType = "mu+"
   string cut = "pt > 0"
 }
