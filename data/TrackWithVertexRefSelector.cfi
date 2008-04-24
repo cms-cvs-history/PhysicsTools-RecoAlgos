@@ -1,6 +1,6 @@
 module trackWithVertexRefSelector = TrackWithVertexRefSelector {
         # the track collection
-        InputTag src  = ctfWithMaterialTracks
+        InputTag src  = generalTracks
  
         untracked bool copyExtras   = false # copies also extras and rechits on RECO
                                             # don't set this to true on AOD!

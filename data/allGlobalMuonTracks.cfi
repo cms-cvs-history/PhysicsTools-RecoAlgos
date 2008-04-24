@@ -1,6 +1,4 @@
-include "SimGeneral/HepPDTESSource/data/pythiapdt.cfi"
-
-module allGlobalMuonTracks = ChargedCandidateProducer {
+module allGlobalMuonTracks = ConcreteChargedCandidateProducer {
   InputTag src = globalMuons
   string particleType = "mu+"
 }
