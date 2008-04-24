@@ -1,3 +1,0 @@
-module allMuons = MuonShallowCloneProducer {
-  InputTag src = muons
-}

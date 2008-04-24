@@ -1,3 +1,0 @@
-module allElectrons = GsfElectronShallowCloneProducer {
-  InputTag src = pixelMatchGsfElectrons
-}	
