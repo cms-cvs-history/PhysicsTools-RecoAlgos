@@ -1,4 +1,4 @@
-module highPtTracks = PtMinCandViewCloneSelector {
+module highPtTracks = PtMinCandViewSelector {
   InputTag src = goodTracks
   double ptMin = 20
 }
