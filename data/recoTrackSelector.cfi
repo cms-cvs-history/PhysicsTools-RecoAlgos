@@ -11,4 +11,5 @@ module recoTrackSelector = RecoTrackSelector
     double maxChi2 = 10000 #not used in tdr
     string quality = "loose"
     string algorithm = ""
+    InputTag beamSpot = offlineBeamSpot
 }
