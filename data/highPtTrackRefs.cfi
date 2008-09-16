@@ -1,4 +1,0 @@
-module highPtTrackRefs = TrackRefSelector {
-  InputTag src = generalTracks
-  string cut = "pt > 20"
-}

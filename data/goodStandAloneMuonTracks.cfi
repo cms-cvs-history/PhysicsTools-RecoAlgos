@@ -1,5 +1,0 @@
-module goodStandAloneMuonTracks = TrackViewCandidateProducer {
-  InputTag src = standAloneMuons:UpdatedAtVtx 
-  string particleType = "mu+"
-  string cut = "pt > 0"
-}
