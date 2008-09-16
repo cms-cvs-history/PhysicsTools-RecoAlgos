@@ -1,5 +1,0 @@
-module goodTracks = TrackViewCandidateProducer {
-  InputTag src = generalTracks
-  string particleType = "mu+"
-  string cut = "pt > 0"
-}
