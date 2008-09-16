@@ -1,4 +1,0 @@
-module allSuperClusterCandidates = ConcreteEcalCandidateProducer {
-  InputTag src = hybridSuperClusters
-  string particleType = "gamma"
-}
