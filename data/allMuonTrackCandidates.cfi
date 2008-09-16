@@ -1,4 +1,0 @@
-module allMuonTrackCandidates = ConcreteChargedCandidateProducer {
-  InputTag src = generalTracks
-  string particleType = "mu+"
-}

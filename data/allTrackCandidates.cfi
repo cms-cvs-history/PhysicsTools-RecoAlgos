@@ -1,4 +1,0 @@
-module allTrackCandidates = ConcreteChargedCandidateProducer {
-  InputTag src = generalTracks
-  string particleType = "pi+"
-}
