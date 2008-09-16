@@ -1,4 +1,0 @@
-module goodMuons = MuonRefSelector {
-  InputTag src = muons
-  string cut = "pt > 0"
-}
