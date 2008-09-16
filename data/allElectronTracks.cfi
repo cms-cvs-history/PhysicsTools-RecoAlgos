@@ -1,4 +1,0 @@
-module allElectronTracks = ConcreteChargedCandidateProducer {
-  InputTag src = generalTracks
-  string particleType = "e-"
-}
