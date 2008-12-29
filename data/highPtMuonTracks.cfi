@@ -1,7 +1,0 @@
-include "PhysicsTools/RecoCandAlgos/data/allMuonTracks.cfi"
-
-module highPtMuonTracks = PtMinCandSelector {
-  InputTag src = allMuonTracks
-  double ptMin = 4.0
-  bool filter = false
-}
