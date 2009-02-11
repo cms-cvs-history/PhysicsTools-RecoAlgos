@@ -1,15 +1,13 @@
-/* \class MuonSelector
+/* \class MuonRefToBaseSelector
  *
  * Selects muon with a configurable string-based cut.
- * Saves clones of the selected muons 
- * Warning: this module can read anything that inherits from reco::Muon, but it will
- *   only clone the reco::Muon part of the object, the rest is lost.
+ * Saves references to the selected muons
  *
  * \author: Luca Lista, INFN
  *
  * usage:
  *
- * module bestMuons = MuonSelector {
+ * module bestMuons = MuonRefToBaseSelector {
  *   src = muons
  *   string cut = "pt > 20 & abs( eta ) < 2"
  * }
@@ -25,14 +23,15 @@
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "PhysicsTools/UtilAlgos/interface/SingleObjectSelector.h"
 #include "PhysicsTools/UtilAlgos/interface/StringCutObjectSelector.h"
-#include "DataFormats/Common/interface/View.h"
 #include "DataFormats/MuonReco/interface/Muon.h"
 #include "DataFormats/MuonReco/interface/MuonFwd.h"
+#include "DataFormats/Common/interface/View.h"
+#include "DataFormats/Common/interface/RefToBaseVector.h"
 
- typedef SingleObjectSelector<
-           edm::View<reco::Muon>, 
-           StringCutObjectSelector<reco::Muon>,
-           reco::MuonCollection
-         > MuonSelector;
+typedef SingleObjectSelector<
+       edm::View<reco::Muon>, 
+       StringCutObjectSelector<reco::Muon>,
+       edm::RefToBaseVector<reco::Muon>
+     > MuonViewRefSelector;
 
-DEFINE_FWK_MODULE( MuonSelector );
+DEFINE_FWK_MODULE( MuonViewRefSelector );
