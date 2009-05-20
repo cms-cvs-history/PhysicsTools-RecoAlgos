@@ -4,8 +4,8 @@
  *
  * \author Giuseppe Cerati, INFN
  *
- *  $Date: 2007/11/13 10:46:04 $
- *  $Revision: 1.1 $
+ *  $Date: 2008/04/01 15:28:26 $
+ *  $Revision: 1.2 $
  *
  */
 #include "SimDataFormats/TrackingAnalysis/interface/TrackingParticle.h"
@@ -15,10 +15,10 @@ class TrackingParticleSelector {
 public:
   TrackingParticleSelector(){}
   TrackingParticleSelector ( double ptMin,double minRapidity,double maxRapidity,
-			     double tip,double lip,int minHit, bool signalOnly, bool chargedOnly, 
+			     double tip,double lip,int minHit, bool signalOnly, bool chargedOnly, bool stableOnly,
 			     std::vector<int> pdgId = std::vector<int>()) :
     ptMin_( ptMin ), minRapidity_( minRapidity ), maxRapidity_( maxRapidity ),
-    tip_( tip ), lip_( lip ), minHit_( minHit ), signalOnly_(signalOnly), chargedOnly_(chargedOnly), pdgId_( pdgId ) { }
+    tip_( tip ), lip_( lip ), minHit_( minHit ), signalOnly_(signalOnly), chargedOnly_(chargedOnly),  stableOnly_(stableOnly), pdgId_( pdgId ) { }
   
   /// Operator() performs the selection: e.g. if (tPSelector(tp)) {...}
   bool operator()( const TrackingParticle & tp ) const { 
@@ -31,6 +31,16 @@ public:
     }
     bool signal = true;
     if (signalOnly_) signal = (tp.eventId().bunchCrossing()== 0 && tp.eventId().event() == 0);
+    // select only stable particles
+    bool stable = 1;
+    if (stableOnly_) {
+       for( TrackingParticle::genp_iterator j = tp.genParticle_begin(); j != tp.genParticle_end(); ++ j ) {
+          const HepMC::GenParticle * p = j->get();
+             if (p->status() != 1) {
+                stable = 0; break;
+             }
+       }
+    }
     return (
 	    tp.matchedHit() >= minHit_ &&
 	    sqrt(tp.momentum().perp2()) >= ptMin_ && 
@@ -38,7 +48,8 @@ public:
 	    sqrt(tp.vertex().perp2()) <= tip_ &&
 	    fabs(tp.vertex().z()) <= lip_ &&
 	    testId &&
-	    signal
+	    signal &&
+            stable
 	    );
   }
   
@@ -51,6 +62,7 @@ private:
   int    minHit_;
   bool signalOnly_;
   bool chargedOnly_;
+  bool stableOnly_;
   std::vector<int> pdgId_;
 
 };
@@ -72,6 +84,7 @@ namespace reco {
 	  cfg.getParameter<int>( "minHit" ), 
 	  cfg.getParameter<bool>( "signalOnly" ),
 	  cfg.getParameter<bool>( "chargedOnly" ),
+          cfg.getParameter<bool>( "stableOnly" ),
 	cfg.getParameter<std::vector<int> >( "pdgId" )); 
       }
     };
