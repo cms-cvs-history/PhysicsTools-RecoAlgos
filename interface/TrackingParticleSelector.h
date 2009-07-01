@@ -4,8 +4,8 @@
  *
  * \author Giuseppe Cerati, INFN
  *
- *  $Date: 2008/04/01 15:28:26 $
- *  $Revision: 1.2 $
+ *  $Date: 2009/05/20 21:05:06 $
+ *  $Revision: 1.2.4.1 $
  *
  */
 #include "SimDataFormats/TrackingAnalysis/interface/TrackingParticle.h"
@@ -30,7 +30,8 @@ public:
       if (tp.pdgId()==pdgId_[it]) testId = true;
     }
     bool signal = true;
-    if (signalOnly_) signal = (tp.eventId().bunchCrossing()== 0 && tp.eventId().event() == 0);
+    //if (signalOnly_) signal = (tp.eventId().bunchCrossing()== 0 && tp.eventId().event() == 0);
+    if (signalOnly_) signal = (tp.eventId().bunchCrossing()== 0 && tp.eventId().event() == 0 && tp.status() != -99);
     // select only stable particles
     bool stable = 1;
     if (stableOnly_) {
@@ -40,6 +41,11 @@ public:
                 stable = 0; break;
              }
        }
+       // test for remaining unstabled due to lack of genparticle pointer
+       if(stable == 1 && tp.status() == -99 && 
+          (fabs(tp.pdgId()) != 11 && fabs(tp.pdgId()) != 13 && fabs(tp.pdgId()) != 211 &&
+           fabs(tp.pdgId()) != 321 && fabs(tp.pdgId()) != 2212 && fabs(tp.pdgId()) != 3112 &&
+           fabs(tp.pdgId()) != 3222 && fabs(tp.pdgId()) != 3312 && fabs(tp.pdgId()) != 3334)) stable = 0;
     }
     return (
 	    tp.matchedHit() >= minHit_ &&
